@@ -1,19 +1,28 @@
 <template> 
-  <div class = "backdrop">
+  <div class = "backdrop" @click.self = "closeModal">
     <div class = "modal" :class="{ sale: theme === 'sale'}">
       <h1>{{ header }}</h1>
       <p>{{ text }}</p>
     </div>
   </div>
-</template>
+
+  
+</template>  
+
 
 <script>
 export default {
-  props: ['header', 'text', 'theme']
+  props: ['header', 'text', 'theme'],
+  methods: {
+    closeModal() {
+      this.$emit('close')
+    }
+  }
 }
 </script>
 
-<style>
+<!--scoped means styling only applies to the modal component, better to use more specific selector like (.modal h1. We can't use scoped on the main component)-->
+<style scoped>
 .modal{
   width: 400px;
   padding: 20px;
@@ -44,6 +53,9 @@ export default {
   color: white;
 }
 
+.modal p{
+  font-style: normal;
+}
 
 
 </style>
